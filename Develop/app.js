@@ -113,7 +113,7 @@ inquirer.prompt([
                         ])
                         .then(function(internAnswers){
                             const intern = new Intern(internAnswers.name, internAnswers.id, internAnswers.email, internAnswers.school);
-                            employees.push(engineer);
+                            employees.push(intern);
 
                 }
                 else {
@@ -123,10 +123,9 @@ inquirer.prompt([
                         if (err) throw err;
                         console.log("success!");
                         });
-                }
-        })
-        
+                } 
     })
+})
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
