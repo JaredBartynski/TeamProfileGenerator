@@ -18,8 +18,26 @@ const employees = [];
 //inquirer promt #1. need 4 total
 inquirer.prompt([
     {
-        //questions about the manager
-    }])
+        type: "input",
+        name: "name",
+        message: "What is your manager's name?",
+    },
+    {
+        type: "input",
+        name: "id",
+        message: "What is your manager's id?",
+    },
+    {
+        type: "input",
+        name: "email",
+        message: "What is your manager's email?",
+    },
+    {
+        type: "input",
+        name: "officeNumber",
+        message: "What is your manager's office number?",
+    },
+    ])
     .then(function(managerAnswers){
         const manager = new Manager(managerAnswers.name, id, etc);
         employees.push(manager);
@@ -47,7 +65,7 @@ inquirer.prompt([
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
 
-render(answers);
+//render(answers);
 
 // After you have your html, you're now ready to create an HTML file using the HTML
 // returned from the `render` function. Now write it to a file named `team.html` in the
