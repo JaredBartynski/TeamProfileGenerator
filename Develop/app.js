@@ -15,7 +15,7 @@ const employees = [];
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 
-//inquirer promt #1. need 4 total
+//inquirer prompt #1 manager questions
 inquirer.prompt([
     {
         type: "input",
@@ -59,7 +59,7 @@ inquirer.prompt([
             ])
                 .then(function(typeAnswers){
                 if(typeAnswers === "Engineer"){
-                    //inquireer promt #3 questions about engineer
+                    //inquirer prompt #3 questions about engineer
                     inquirer.prompt([
                         {
                             type: "input",
@@ -87,16 +87,46 @@ inquirer.prompt([
                             const engineer = new Engineer(engineerAnswers.name, engineerAnswers.id, engineerAnswers.email, engineerAnswers.github);
                             employees.push(engineer);
                 }
-                else if(typeAnswers === "Intern")
+                else if(typeAnswers === "Intern"){
+                    //inquirer prompt #4 questions about intern
+                    inquirer.prompt([
+                        {
+                            type: "input",
+                            name: "name",
+                            message: "What is your intern's name?",
+                        },
+                        {
+                            type: "input",
+                            name: "id",
+                            message: "What is your intern's id?",
+                        },
+                        {
+                            type: "input",
+                            name: "email",
+                            message: "What is your intern's email?",
+                        },
+                        {
+                            type: "input",
+                            name: "school",
+                            message: "What is your intern's school?",
+                        },
+                        ])
+                        .then(function(internAnswers){
+                            const intern = new Intern(internAnswers.name, internAnswers.id, internAnswers.email, internAnswers.school);
+                            employees.push(engineer);
+
+                }
                 else {
-                    //exit the inquirer calling render function
+                    const html = render(employees);
+
+                     fs.writeFile(outputPath, html, function (err) {
+                        if (err) throw err;
+                        console.log("success!");
+                        });
                 }
         })
         
     })
-
-//same as last hw. just make an array of questions and answers and call it "answers" so it can be called by the render function.
-
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
@@ -118,9 +148,3 @@ inquirer.prompt([
 // for further information. Be sure to test out each class and verify it generates an
 // object with the correct structure and methods. This structure will be crucial in order
 // for the provided `render` function to work! ```
-const html = render(employees);
-
-fs.writeFile(outputPath, html, function (err) {
-  if (err) throw err;
-  console.log("success!");
-});
