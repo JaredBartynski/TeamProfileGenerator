@@ -38,18 +38,54 @@ inquirer.prompt([
         message: "What is your manager's office number?",
     },
     ])
+    
     .then(function(managerAnswers){
-        const manager = new Manager(managerAnswers.name, id, etc);
+        const manager = new Manager(managerAnswers.name, managerAnswers.id, managerAnswers.email, managerAnswers.officeNumber);
         employees.push(manager);
 
-        //inquirer promt #2 which type of team member would you like to add. engineer, intern, or no more team members.
-        .then(function(typeAnswers){
+ //inquirer promt #2 which type of team member would you like to add. engineer, intern, or no more team members.
+        inquirer.prompt([
+            {
+                type: "list",
+                name: "name",
+                message: "Which type of team member would you like to add?",
+                choices: [
+                    "Engineer",
+                    "Intern",
+                    "I don't want to add any more team members",
+                ],
+            },
+           
+            ])
+                .then(function(typeAnswers){
                 if(typeAnswers === "Engineer"){
                     //inquireer promt #3 questions about engineer
+                    inquirer.prompt([
+                        {
+                            type: "input",
+                            name: "name",
+                            message: "What is your engineer's name?",
+                        },
+                        {
+                            type: "input",
+                            name: "id",
+                            message: "What is your engineer's id?",
+                        },
+                        {
+                            type: "input",
+                            name: "email",
+                            message: "What is your engineer's email?",
+                        },
+                        {
+                            type: "input",
+                            name: "github",
+                            message: "What is your engineer's Github username?",
+                        },
+                        ])
 
-                    //.then(function(engineerAnswers)) 
-                    //const engineer = new Engineer(name, id, etc)
-                    //employees.push(engineer)
+                        .then(function(engineerAnswers){
+                            const engineer = new Engineer(engineerAnswers.name, engineerAnswers.id, engineerAnswers.email, engineerAnswers.github);
+                            employees.push(engineer);
                 }
                 else if(typeAnswers === "Intern")
                 else {
